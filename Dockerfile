@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN wget -q -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && apt-get update \
-    && apt-get install -y /tmp/chrome.deb \
-    && rm -f /tmp/chrome.deb /var/lib/apt/lists/*
+    && (apt-get install -y /tmp/chrome.deb || apt-get install -f -y) \
+    && rm -rf /tmp/chrome.deb /var/lib/apt/lists/*
 
 WORKDIR /app
 
